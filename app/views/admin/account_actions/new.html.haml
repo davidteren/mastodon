@@ -49,7 +49,12 @@
             %p= t "user_mailer.warning.explanation.#{@type}", instance: Rails.configuration.x.local_domain
           %hr.spacer/
 
-      - unless @warning_presets.empty?
+      - if @warning_presets.empty?
+        .fields-group
+          .input.with_block_label
+            %label= t('simple_form.labels.admin_account_action.warning_preset_id')
+            %span.hint= t('simple_form.hints.admin_account_action.warning_preset_explanation_html', path: admin_warning_presets_path)
+      - else
         .fields-group
           = f.input :warning_preset_id,
                     collection: label_and_categories_collection(@warning_presets),
@@ -69,7 +74,8 @@
         .fields-group
           = f.input :include_statuses,
                     as: :boolean,
-                    wrapper: :with_label
+                    wrapper: :with_label,
+                    input_html: { id: 'include_statuses' }
 
         %hr.spacer/
 

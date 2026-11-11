@@ -43,7 +43,7 @@ class Admin::Reports::ActionsController < Admin::BaseController
     {
       current_account: current_account,
       report_id: @report.id,
-      send_email_notification: !@report.spam?,
+      send_email_notification: get_param('send_email_notification'),
       text: get_param('text'),
       type: action_from_button,
       warning_preset_id: get_param('warning_preset_id'),
