@@ -27,6 +27,13 @@
                 required: false,
                 input_html: { form: 'action_type' }
 
+  - if @report_id.present?
+    .fields-group
+      - if @report.status_ids.present?
+        %p= t('admin.reports.summary.account_action_preamble_html', report: @report_id, count: @report.status_ids.count)
+      - else
+        %p= t('admin.reports.summary.account_action_preamble_no_posts_html', report: @report_id)
+
   %div{ 'id' => 'data-action-text-box' }
     = render partial: 'actions_text_box', locals: { account: @account, report: @report }
 
