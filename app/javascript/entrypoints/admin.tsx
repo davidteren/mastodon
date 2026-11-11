@@ -268,6 +268,8 @@ const onChangeAccountActionSelection = (target: HTMLSelectElement) => {
   if (strikeCard) {
     if (accountAction === 'none' && strikeCardParent) {
       strikeCardParent.hidden = true;
+    } else if (strikeCardParent) {
+      strikeCardParent.hidden = false;
     }
     strikeCard.textContent = strikeCardContent;
   }

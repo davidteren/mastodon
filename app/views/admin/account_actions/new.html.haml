@@ -48,10 +48,9 @@
 
       %p.hint= t('admin.reports.summary.preview_preamble_html', acct: @account.pretty_acct)
       %div{ 'id' => 'data-action-strike-card' }
-        - unless @type == 'none'
-          .strike-card.preview
-            %p= t "user_mailer.warning.explanation.#{@type}", instance: Rails.configuration.x.local_domain
-          %hr.spacer/
+        .strike-card.preview{ 'hidden' => (true if @type == 'none') }
+          %p= t "user_mailer.warning.explanation.#{@type}", instance: Rails.configuration.x.local_domain
+        %hr.spacer/
 
       - if @warning_presets.empty?
         .fields-group
