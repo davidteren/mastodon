@@ -1603,4 +1603,8 @@ code {
 
 h1 div.input.select.optional.admin_account_action_type {
   display: inline;
+
+  select#admin_account_action_type.select.optional {
+    padding: 7px;
+  }
 }
