@@ -1,6 +1,3 @@
-- content_for :page_title do
-  = t('admin.account_actions.title', acct: @account.pretty_acct)
-
 :ruby
   @report_id = params[:report_id] if params[:report_id].present?
   @type = params[:type] if params[:type].present?
@@ -17,15 +14,15 @@
 = simple_form_for @account_action, url: @url, html: { id: 'action_type' } do |f|
   = f.input :report_id, as: :hidden
 
-  - content_for :heading_actions do
-    .fields-group
-      = f.input :type,
-                as: :select,
-                collection: button_collection,
-                include_blank: false,
-                label_method: ->(type) { I18n.t("admin.warning_presets.dropdown.#{type[0]}") },
-                required: false,
-                input_html: { form: 'action_type' }
+  - content_for :page_title do
+    = t('admin.account_actions.title', acct: @account.pretty_acct)
+    = f.input :type,
+              as: :select,
+              collection: button_collection,
+              include_blank: false,
+              label_method: ->(type) { I18n.t("admin.warning_presets.dropdown.#{type[0]}") },
+              required: false,
+              input_html: { form: 'action_type' }
 
   - if @report_id.present?
     .fields-group
@@ -92,6 +89,4 @@
     - else
       = link_to t('admin.reports.cancel'), admin_accounts_path, class: 'button button-secondary'
 
-    = f.button :button,
-               I18n.t("admin.account_actions.types.#{@type}"),
-               type: :submit
+    %button.button{ type: :submit }= t("admin.account_actions.types.#{@type}")
