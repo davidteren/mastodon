@@ -215,16 +215,12 @@ const onChangeEmailNotification = (target: HTMLInputElement) => {
     }
   });
 
-  const statusesCheckbox = document.getElementById(
-    'include_statuses',
-  ) as HTMLInputElement | null;
+  const mailContent = document.getElementById('mail-content') as HTMLElement;
 
-  if (statusesCheckbox) {
-    if (!target.checked) {
-      statusesCheckbox.disabled = true;
-    } else {
-      statusesCheckbox.disabled = false;
-    }
+  if (!target.checked) {
+    mailContent.hidden = true;
+  } else {
+    mailContent.hidden = false;
   }
 };
 

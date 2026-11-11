@@ -39,39 +39,39 @@
                 as: :boolean,
                 wrapper: :with_label
 
-    %hr.spacer/
+    %div{ 'id' => 'mail-content' }
+      %h2.spacer
 
-    %p.hint= t('admin.reports.summary.preview_preamble_html', acct: @account.pretty_acct)
-    %div{ 'id' => 'data-action-strike-card' }
-      - unless @type == 'none'
-        .strike-card.preview
-          %p= t "user_mailer.warning.explanation.#{@type}", instance: Rails.configuration.x.local_domain
+      %p.hint= t('admin.reports.summary.preview_preamble_html', acct: @account.pretty_acct)
+      %div{ 'id' => 'data-action-strike-card' }
+        - unless @type == 'none'
+          .strike-card.preview
+            %p= t "user_mailer.warning.explanation.#{@type}", instance: Rails.configuration.x.local_domain
+          %hr.spacer/
+
+      - unless @warning_presets.empty?
+        .fields-group
+          = f.input :warning_preset_id,
+                    collection: label_and_categories_collection(@warning_presets),
+                    wrapper: :with_block_label,
+                    hint: t('simple_form.hints.admin_account_action.warning_preset_html', path: admin_warning_presets_path),
+                    input_html: { id: 'presets_dropdown' }
+
+      .fields-group
+        = f.input :text,
+                  as: :text,
+                  wrapper: :with_block_label,
+                  hint: t('simple_form.hints.admin_account_action.text')
+
+      - if @account.local? && params[:report_id].present?
         %hr.spacer/
 
-    - unless @warning_presets.empty?
-      .fields-group
-        = f.input :warning_preset_id,
-                  collection: label_and_categories_collection(@warning_presets),
-                  wrapper: :with_block_label,
-                  hint: t('simple_form.hints.admin_account_action.warning_preset_html', path: admin_warning_presets_path),
-                  input_html: { id: 'presets_dropdown' }
+        .fields-group
+          = f.input :include_statuses,
+                    as: :boolean,
+                    wrapper: :with_label
 
-    .fields-group
-      = f.input :text,
-                as: :text,
-                wrapper: :with_block_label,
-                hint: t('simple_form.hints.admin_account_action.text')
-
-    - if @account.local? && params[:report_id].present?
-      %hr.spacer/
-
-      .fields-group
-        = f.input :include_statuses,
-                  as: :boolean,
-                  wrapper: :with_label,
-                  input_html: { id: 'include_statuses' }
-
-      %hr.spacer/
+        %hr.spacer/
 
   .actions
     - if @report_id.present?
