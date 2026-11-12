@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe AccountRelationshipSeveranceEvent do
   describe 'Associations' do
     it { is_expected.to belong_to(:account) }
