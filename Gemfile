@@ -235,3 +235,6 @@ gem 'mail', '~> 2.8'
 gem 'base58', '~> 0.2.3'
 
 gem 'bloom_fit', '~> 1.2'
+
+# Benchmark baseline (davidteren/mutineer-benchmarks): mutineer under test.
+gem 'mutineer', path: ENV.fetch('MUTINEER_PATH', '../mutineer-bench'), group: :test
